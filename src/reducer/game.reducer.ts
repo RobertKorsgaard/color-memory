@@ -1,4 +1,5 @@
 import { randomizeCards } from "helpers/card.helper";
+import { selectNumberOfOpenCardsEqualsTwo } from "selectors/card.selector";
 import { IAction } from "types/IAction";
 import { IGame } from "types/IGame";
 
@@ -36,8 +37,7 @@ export const initialState: IGame = {
 export function reducer(state: IGame, action: IAction): IGame {
   switch (action.type) {
     case ActionTypes.OPEN_CARD: {
-      const numberOfOpenCards = state.cards.filter((card) => card.open).length;
-      if (numberOfOpenCards === 2) {
+      if (selectNumberOfOpenCardsEqualsTwo(state.cards)) {
         return { ...state };
       }
       const payload: number = action.payload as number;

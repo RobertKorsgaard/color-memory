@@ -1,6 +1,13 @@
 #root {
   height: 100%;
 }
+.appRoot {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 html,
 body {

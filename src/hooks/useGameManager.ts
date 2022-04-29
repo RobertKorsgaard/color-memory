@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { ActionTypes } from "reducer/game.reducer";
-import { selectAllCardsSolved, selectAllOpenCardsEqual } from "selectors/card.selector";
+import {
+  selectAllCardsSolved,
+  selectAllOpenCardsEqual,
+  selectNumberOfOpenCardsEqualsTwo,
+} from "selectors/card.selector";
 import { IAction } from "types/IAction";
 import { IGame } from "types/IGame";
 
@@ -19,7 +23,7 @@ export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameMan
   const [canClick, setCanClick] = React.useState(true);
 
   useEffect(() => {
-    if (state.cards.filter((card) => card.open).length < 2) {
+    if (!selectNumberOfOpenCardsEqualsTwo(state.cards)) {
       return;
     }
     setCanClick(false);

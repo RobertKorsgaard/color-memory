@@ -10,3 +10,7 @@ export const selectAllOpenCardsEqual = (state: IGame): boolean => {
 export const selectAllCardsSolved = (cards: ICard[]): boolean => {
   return cards.every((card) => card.solved);
 };
+
+export const selectNumberOfOpenCardsEqualsTwo = (cards: ICard[]): boolean => {
+  return cards.filter((card) => card.open).length === 2;
+};
