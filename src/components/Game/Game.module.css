@@ -1,0 +1,10 @@
+.root {
+  background-color: #ffffffe1;
+}
+.score {
+  font-size: x-large;
+  font-weight: bold;
+  color: whitesmoke;
+  position: absolute;
+  top: 0;
+}
