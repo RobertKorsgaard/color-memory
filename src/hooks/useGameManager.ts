@@ -14,12 +14,23 @@ interface IGameManagerProps {
 
 interface IGameManagerReturnType {
   isGameOver: boolean;
-  canClick: boolean;
+  clickCard: (index: number) => void;
+  restartGame: () => void;
 }
 
 export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameManagerReturnType => {
   const [isGameOver, setIsGameOver] = React.useState(false);
   const [canClick, setCanClick] = React.useState(true);
+
+  const clickCard = (index: number): void => {
+    if (canClick) {
+      dispatch({ type: GameActionTypes.OPEN_CARD, payload: index });
+    }
+  };
+
+  const restartGame = (): void => {
+    dispatch({ type: GameActionTypes.RESTART_GAME });
+  };
 
   useEffect(() => {
     if (!selectNumberOfOpenCardsEqualsTwo(state.cards) || !canClick) {
@@ -30,7 +41,7 @@ export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameMan
     setTimeout(() => {
       if (selectAllOpenCardsIsSameColor(state.cards)) {
         dispatch({ type: GameActionTypes.INCREASE_SCORE });
-        dispatch({ type: GameActionTypes.HIDE_SOVLED });
+        dispatch({ type: GameActionTypes.HIDE_SOLVED });
       } else {
         dispatch({ type: GameActionTypes.DECREASE_SCORE });
       }
@@ -47,5 +58,5 @@ export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameMan
     }
   }, [state.cards]);
 
-  return { isGameOver, canClick };
+  return { isGameOver, clickCard, restartGame };
 };

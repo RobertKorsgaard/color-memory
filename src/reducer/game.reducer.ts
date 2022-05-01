@@ -8,7 +8,7 @@ export enum GameActionTypes {
   RESET_OPENED = "RESET_OPENED",
   DECREASE_SCORE = "DECREASE_SCORE",
   INCREASE_SCORE = "INCREASE_SCORE",
-  HIDE_SOVLED = "HIDE_SOVLED",
+  HIDE_SOLVED = "HIDE_SOLVED",
   RESTART_GAME = "RESTART_GAME",
 }
 
@@ -56,7 +56,7 @@ export function reducer(state: IGameState, action: IGameAction): IGameState {
         cards: state.cards.map((card) => ({ ...card, open: false })),
       };
     }
-    case GameActionTypes.HIDE_SOVLED: {
+    case GameActionTypes.HIDE_SOLVED: {
       return {
         ...state,
         cards: state.cards.map((card) =>
