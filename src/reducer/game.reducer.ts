@@ -1,9 +1,9 @@
 import { randomizeCards } from "helpers/card.helper";
 import { selectNumberOfOpenCardsEqualsTwo } from "selectors/card.selector";
 import { IAction } from "types/IAction";
-import { IGame } from "types/IGame";
+import { IGameState } from "types/IGameState";
 
-export enum ActionTypes {
+export enum GameActionTypes {
   OPEN_CARD = "OPEN_CARD",
   RESET_OPENED = "RESET_OPENED",
   DECREASE_SCORE = "DECREASE_SCORE",
@@ -12,7 +12,7 @@ export enum ActionTypes {
   RESTART_GAME = "RESTART_GAME",
 }
 
-export const initialState: IGame = {
+export const initialState: IGameState = {
   score: 0,
   cards: randomizeCards([
     { color: "red", open: false, solved: false },
@@ -34,9 +34,11 @@ export const initialState: IGame = {
   ]),
 };
 
-export function reducer(state: IGame, action: IAction): IGame {
+export type IGameAction = IAction<GameActionTypes>;
+
+export function reducer(state: IGameState, action: IGameAction): IGameState {
   switch (action.type) {
-    case ActionTypes.OPEN_CARD: {
+    case GameActionTypes.OPEN_CARD: {
       if (selectNumberOfOpenCardsEqualsTwo(state.cards)) {
         return { ...state };
       }
@@ -48,13 +50,13 @@ export function reducer(state: IGame, action: IAction): IGame {
         ),
       };
     }
-    case ActionTypes.RESET_OPENED: {
+    case GameActionTypes.RESET_OPENED: {
       return {
         ...state,
         cards: state.cards.map((card) => ({ ...card, open: false })),
       };
     }
-    case ActionTypes.HIDE_SOVLED: {
+    case GameActionTypes.HIDE_SOVLED: {
       return {
         ...state,
         cards: state.cards.map((card) =>
@@ -62,19 +64,19 @@ export function reducer(state: IGame, action: IAction): IGame {
         ),
       };
     }
-    case ActionTypes.INCREASE_SCORE: {
+    case GameActionTypes.INCREASE_SCORE: {
       return {
         ...state,
         score: state.score++,
       };
     }
-    case ActionTypes.DECREASE_SCORE: {
+    case GameActionTypes.DECREASE_SCORE: {
       return {
         ...state,
         score: state.score--,
       };
     }
-    case ActionTypes.RESTART_GAME: {
+    case GameActionTypes.RESTART_GAME: {
       return {
         ...initialState,
         cards: randomizeCards(initialState.cards),

@@ -1,6 +1,6 @@
 import { ICard } from "types/ICard";
 
-export interface IGame {
+export interface IGameState {
   cards: ICard[];
   score: number;
 }

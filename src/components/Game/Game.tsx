@@ -2,7 +2,7 @@ import { Board } from "components/Board/Board";
 import { GameOver } from "components/GameOver/GameOver";
 import { useGameManager } from "hooks/useGameManager";
 import { useReducer } from "react";
-import { ActionTypes, initialState, reducer } from "reducer/game.reducer";
+import { GameActionTypes, initialState, reducer } from "reducer/game.reducer";
 import styles from "./Game.module.css";
 
 export const Game: React.FC = () => {
@@ -14,7 +14,7 @@ export const Game: React.FC = () => {
       return;
     }
     dispatch({
-      type: ActionTypes.OPEN_CARD,
+      type: GameActionTypes.OPEN_CARD,
       payload: cardIndex,
     });
   };
@@ -26,7 +26,7 @@ export const Game: React.FC = () => {
         {isGameOver && (
           <GameOver
             score={state.score}
-            onRestartClick={() => dispatch({ type: ActionTypes.RESTART_GAME })}
+            onRestartClick={() => dispatch({ type: GameActionTypes.RESTART_GAME })}
           />
         )}
       </Board>

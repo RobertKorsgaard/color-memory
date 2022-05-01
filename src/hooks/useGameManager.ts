@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import { ActionTypes } from "reducer/game.reducer";
+import { GameActionTypes, IGameAction } from "reducer/game.reducer";
 import {
   selectAllCardsSolved,
-  selectAllOpenCardsEqual,
+  selectAllOpenCardsIsSameColor,
   selectNumberOfOpenCardsEqualsTwo,
 } from "selectors/card.selector";
-import { IAction } from "types/IAction";
-import { IGame } from "types/IGame";
+import { IGameState } from "types/IGameState";
 
 interface IGameManagerProps {
-  state: IGame;
-  dispatch: React.Dispatch<IAction>;
+  state: IGameState;
+  dispatch: React.Dispatch<IGameAction>;
 }
 
 interface IGameManagerReturnType {
@@ -23,22 +22,22 @@ export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameMan
   const [canClick, setCanClick] = React.useState(true);
 
   useEffect(() => {
-    if (!selectNumberOfOpenCardsEqualsTwo(state.cards)) {
+    if (!selectNumberOfOpenCardsEqualsTwo(state.cards) || !canClick) {
       return;
     }
     setCanClick(false);
     // Let's not check immidiately if the cards are solved
     setTimeout(() => {
-      if (selectAllOpenCardsEqual(state)) {
-        dispatch({ type: ActionTypes.INCREASE_SCORE });
-        dispatch({ type: ActionTypes.HIDE_SOVLED });
+      if (selectAllOpenCardsIsSameColor(state.cards)) {
+        dispatch({ type: GameActionTypes.INCREASE_SCORE });
+        dispatch({ type: GameActionTypes.HIDE_SOVLED });
       } else {
-        dispatch({ type: ActionTypes.DECREASE_SCORE });
+        dispatch({ type: GameActionTypes.DECREASE_SCORE });
       }
-      dispatch({ type: ActionTypes.RESET_OPENED });
+      dispatch({ type: GameActionTypes.RESET_OPENED });
       setCanClick(true);
     }, 2000);
-  }, [state, dispatch]);
+  }, [state.cards]);
 
   useEffect(() => {
     if (selectAllCardsSolved(state.cards)) {

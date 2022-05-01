@@ -1,4 +1,4 @@
-export interface IAction {
-  type: string;
+export interface IAction<T> {
+  type: T;
   payload?: unknown;
 }

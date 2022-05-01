@@ -5,6 +5,12 @@
   height: 100%;
   width: 100%;
   position: relative;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 12px 6px 3px rgba(60, 60, 60, 0.1), 0 2px 6px 6px rgba(60, 60, 60, 0.15),
+    0 3px 2px 7px rgba(60, 60, 60, 0.05);
 }
 
 .solved {
