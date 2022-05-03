@@ -7,7 +7,7 @@ import {
 } from "selectors/card.selector";
 import { IGameState } from "types/IGameState";
 
-interface IGameManagerProps {
+export interface IGameManagerProps {
   state: IGameState;
   dispatch: React.Dispatch<IGameAction>;
 }

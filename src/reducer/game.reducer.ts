@@ -10,10 +10,12 @@ export enum GameActionTypes {
   INCREASE_SCORE = "INCREASE_SCORE",
   HIDE_SOLVED = "HIDE_SOLVED",
   RESTART_GAME = "RESTART_GAME",
+  TOGGLE_HARDMODE = "TOGGLE_HARDMODE",
 }
 
 export const initialState: IGameState = {
   score: 0,
+  hardMode: false,
   cards: randomizeCards([
     { color: "red", open: false, solved: false },
     { color: "red", open: false, solved: false },
@@ -80,6 +82,12 @@ export function reducer(state: IGameState, action: IGameAction): IGameState {
       return {
         ...initialState,
         cards: randomizeCards(initialState.cards),
+      };
+    }
+    case GameActionTypes.TOGGLE_HARDMODE: {
+      return {
+        ...state,
+        hardMode: !state.hardMode,
       };
     }
     default:

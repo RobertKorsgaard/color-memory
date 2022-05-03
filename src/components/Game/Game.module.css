@@ -1,10 +1,14 @@
 .root {
   background-color: #ffffffe1;
 }
-.score {
+.header {
   font-size: x-large;
   font-weight: bold;
   color: whitesmoke;
   position: absolute;
   top: 0;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
