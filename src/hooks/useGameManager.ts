@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GameActionTypes, IGameAction } from "reducer/game.reducer";
 import {
   selectAllCardsSolved,
@@ -19,8 +19,8 @@ interface IGameManagerReturnType {
 }
 
 export const useGameManager = ({ state, dispatch }: IGameManagerProps): IGameManagerReturnType => {
-  const [isGameOver, setIsGameOver] = React.useState(false);
-  const [canClick, setCanClick] = React.useState(true);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [canClick, setCanClick] = useState<boolean>(true);
 
   const clickCard = (index: number): void => {
     if (canClick) {

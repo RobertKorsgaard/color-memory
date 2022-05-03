@@ -83,6 +83,6 @@ export function reducer(state: IGameState, action: IGameAction): IGameState {
       };
     }
     default:
-      throw new Error();
+      throw new Error(`Action type ${action.type} not recognized`);
   }
 }
