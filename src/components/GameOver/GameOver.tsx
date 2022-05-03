@@ -11,7 +11,7 @@ export const GameOver: React.FC<IGameOverProps> = ({ score, onRestartClick }) =>
     <div className={styles.overlay}>
       <p>GAME OVER</p>
       <p>{`Your final score: ${score}`}</p>
-      <button className={styles.button} onClick={onRestartClick}>
+      <button aria-label="restart" className={styles.button} onClick={onRestartClick}>
         Restart game
       </button>
     </div>
